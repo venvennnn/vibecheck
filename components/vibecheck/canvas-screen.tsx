@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Bookmark, MapPin, Plus } from "lucide-react";
@@ -291,6 +292,9 @@ export function CanvasScreen() {
             <button type="button" className="min-h-11 underline" onClick={() => visible[0] && setEvidenceId(visible[0].id)}>
               Explore the evidence
             </button>
+            <Link href="/graph" className="inline-flex min-h-11 items-center text-[13px] underline">
+              Cultural graph
+            </Link>
             {preview && <span>Design preview · illustrative connections</span>}
             {state.portfolio && state.portfolio.heldBackIds.length > 0 && (
               <button type="button" className="min-h-11 underline" onClick={() => setHeldOpen((value) => !value)}>
