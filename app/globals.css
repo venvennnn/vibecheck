@@ -1,0 +1,123 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #111111;
+  --ink: #111111;
+  --cobalt: #2144ed;
+  --muted: #626262;
+  --line: #dedede;
+  --vermilion: #f05a36;
+  --pale: #f3f3f3;
+}
+
+@theme inline {
+  --color-background: #ffffff;
+  --color-foreground: #111111;
+  --color-ink: #111111;
+  --color-cobalt: #2144ed;
+  --color-muted: #626262;
+  --color-line: #dedede;
+  --color-vermilion: #f05a36;
+  --color-pale: #f3f3f3;
+  --font-sans: var(--font-inter), Inter, sans-serif;
+  --font-tight: var(--font-tight), "Inter Tight", sans-serif;
+  --font-serif: var(--font-serif), "Instrument Serif", serif;
+  --font-note: var(--font-note), Caveat, cursive;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: #ffffff;
+}
+
+body {
+  margin: 0;
+  min-height: 100%;
+  background: #ffffff;
+  color: #111111;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-size: 17px;
+  line-height: 1.45;
+}
+
+body,
+header,
+aside,
+[data-surface="card"] {
+  background-color: #ffffff;
+}
+
+button,
+a,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid #2144ed;
+  outline-offset: 2px;
+}
+
+::placeholder {
+  color: #626262;
+}
+
+.font-tight {
+  font-family: var(--font-tight), "Inter Tight", sans-serif;
+}
+
+.font-serif {
+  font-family: var(--font-serif), "Instrument Serif", serif;
+}
+
+.font-note {
+  font-family: var(--font-note), Caveat, cursive;
+}
+
+.hero-title {
+  font-family: var(--font-tight), "Inter Tight", sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 0.95;
+  font-size: clamp(60px, 6.8vw, 104px);
+}
+
+.display-title {
+  font-family: var(--font-tight), "Inter Tight", sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  font-size: clamp(44px, 5vw, 76px);
+}
+
+.rule {
+  border-color: #dedede;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media print {
+  header,
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: #ffffff;
+  }
+}
