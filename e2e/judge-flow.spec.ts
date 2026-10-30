@@ -116,6 +116,50 @@ test.beforeEach(async ({ page }) => {
   });
 });
 
+test("graph and optimizer stay honest at desktop and phone widths", async ({ page }) => {
+  for (const width of [1440, 390]) {
+    await page.setViewportSize({ width, height: width === 390 ? 844 : 900 });
+    await page.goto("/graph");
+    await expect(page.getByRole("heading", { name: "No live nodes yet." })).toBeVisible();
+    await expect(page.getByText("hop percentages")).toBeVisible();
+    const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+    expect(overflow).toBeLessThanOrEqual(1);
+    await page.goto("/portfolio");
+    await expect(page.getByRole("heading", { name: "Nothing selected yet." })).toBeVisible();
+    const portfolioOverflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+    expect(portfolioOverflow).toBeLessThanOrEqual(1);
+  }
+
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/brief");
+  await fillBrief(page);
+  await confirmReference(page, "Khruangbin");
+  await confirmReference(page, "Independent bookshops");
+  await page.getByTestId("find-connections").click();
+  await expect(page.getByRole("heading", { name: "Night Radio" })).toBeVisible();
+  await page.getByRole("main").getByRole("link", { name: "Cultural graph" }).click();
+  await expect(page.getByRole("button", { name: /Night Radio/ })).toBeVisible();
+  await page.getByRole("button", { name: /Night Radio/ }).click();
+  await expect(page.getByText("Not a percentage")).toBeVisible();
+  await expect(page.getByText("0.810").first()).toBeVisible();
+  await expect(page.getByText("%", { exact: true })).toHaveCount(0);
+  await page.getByRole("button", { name: "Matrix" }).click();
+  await expect(page.getByRole("table").getByText("Qloo affinity")).toBeVisible();
+  await page.getByRole("button", { name: "Inspect raw evidence" }).click();
+  await expect(page.getByText("Night Radio").first()).toBeVisible();
+  await page.getByRole("button", { name: "Music (1)" }).click();
+  await expect(page.getByRole("cell", { name: "Kindred Press" })).toHaveCount(0);
+
+  await page.getByRole("link", { name: "Build portfolio" }).click();
+  const optimizer = page.getByTestId("optimizer-screen");
+  await expect(optimizer.getByRole("heading", { name: /Harbour Club in good company/i })).toBeVisible();
+  await expect(optimizer.getByText("Allocations are not quotes.")).toBeVisible();
+  const slider = optimizer.getByRole("slider", { name: "Cultural fit" });
+  await slider.focus();
+  await page.keyboard.press("ArrowRight");
+  await expect(optimizer.getByText("1.10")).toBeVisible();
+});
+
 test("landing, brief, and canvas stay on white at desktop and phone widths", async ({ page }) => {
   for (const width of [1440, 390]) {
     await page.setViewportSize({ width, height: width === 390 ? 844 : 900 });
@@ -154,7 +198,7 @@ test("custom brief can inspect evidence, change budget, replace a partner, and e
   await page.getByTestId("remove-partner").first().click();
   await expect(page.getByText(/left the mix|is out|is excluded/i)).toBeVisible();
 
-  await page.getByRole("link", { name: "Build campaign" }).click();
+  await page.getByRole("link", { name: "Build portfolio" }).click();
   await page.getByRole("checkbox", { name: /reviewed this proposal/i }).check();
   const downloadPromise = page.waitForEvent("download");
   await page.getByTestId("export-json").click();

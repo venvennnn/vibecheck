@@ -1,80 +1,113 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { BriefEnvelope, LiveDiscoveries } from "@/components/vibecheck/session-preview";
 
 const steps = [
   {
     n: "01",
+    kicker: "Input",
     title: "Set the brief",
     copy: "Name the brand, the city, the budget, and at least two cultural references you can confirm.",
+    foot: "Validated seeds",
   },
   {
     n: "02",
+    kicker: "Graph",
     title: "Find the connection",
     copy: "Qloo returns culturally connected artists, books, podcasts, places, and brands. Affinity is a signal, not a booking.",
+    foot: "Qloo cultural signal",
   },
   {
     n: "03",
-    title: "Build the partnership",
+    kicker: "Output",
+    title: "Build the portfolio",
     copy: "Choose a complementary mix, record what you actually know about cost and rights, and export a proposal.",
+    foot: "Reviewed proposal",
   },
+];
+
+const preview = [
+  { src: "/collage/runners.jpg", caption: "Runners", note: "Design preview" },
+  { src: "/collage/vinyl.jpg", caption: "Listening", note: "Design preview" },
+  { src: "/collage/books.jpg", caption: "Books", note: "Design preview" },
 ];
 
 export function Landing() {
   return (
-    <main>
-      <section id="idea" className="mx-auto grid max-w-[1440px] items-center gap-10 px-5 py-10 md:px-12 lg:grid-cols-[44fr_56fr] lg:py-14">
-        <div>
-          <p className="text-[12px] uppercase tracking-[0.16em] text-[#626262]">Cultural intelligence, put to work.</p>
-          <h1 className="hero-title mt-4 text-[#111111]">
-            Great brands keep <em className="font-serif font-normal text-[#2144ED] italic">unexpected</em> company.
-          </h1>
-          <p className="mt-6 max-w-[520px] text-[18px] text-[#111111]">
-            Discover the artists, places and communities your next collaboration belongs with.
-          </p>
-          <div className="mt-8 flex flex-wrap items-center gap-3">
-            <Button asChild>
-              <Link href="/brief">Explore my brand</Link>
-            </Button>
-            <Button variant="outline" asChild>
-              <Link href="/brief?demo=1">See a demo</Link>
-            </Button>
+    <main className="bg-white">
+      <section id="idea" className="grid min-h-[640px] grid-cols-1 border-b border-[#DEDEDE] lg:grid-cols-12">
+        <div className="flex flex-col justify-between border-b border-[#DEDEDE] px-5 py-10 md:px-12 lg:col-span-5 lg:border-r lg:border-b-0 lg:py-14">
+          <div>
+            <p className="flex items-center gap-2 text-[11px] font-semibold tracking-[0.16em] text-[#2144ED] uppercase">
+              <span className="inline-block size-2 bg-[#2144ED]" aria-hidden />
+              Cultural intelligence, put to work.
+            </p>
+            <h1 className="hero-title mt-6 text-[#111111]">
+              Great brands keep <em className="font-serif font-normal text-[#2144ED] italic">unexpected</em> company.
+            </h1>
+            <p className="mt-6 max-w-[520px] text-[18px] leading-relaxed text-[#111111]">
+              Discover the artists, places and communities your next collaboration belongs with.
+            </p>
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <Button asChild className="uppercase tracking-[0.12em]">
+                <Link href="/brief">Explore my brand</Link>
+              </Button>
+              <Button variant="outline" asChild className="uppercase tracking-[0.12em]">
+                <Link href="/brief?demo=1">Try the demo</Link>
+              </Button>
+            </div>
+            <p className="mt-6 text-[13px] text-[#626262]">Powered by Qloo · No signup needed.</p>
           </div>
-          <p className="mt-6 text-[13px] text-[#626262]">Powered by Qloo · No signup needed.</p>
+          <BriefEnvelope />
         </div>
-        <div className="relative min-h-[520px] overflow-hidden bg-[#2144ED] p-6 sm:min-h-[620px] sm:p-8">
-          <figure className="absolute top-8 right-8 w-[58%] border-[8px] border-white bg-white">
-            <figcaption className="px-2 py-1 text-[11px] uppercase tracking-[0.14em] text-[#111111]">01 Runners</figcaption>
-            <Image src="/collage/runners.jpg" alt="" width={960} height={540} className="aspect-[16/10] w-full object-cover" />
-          </figure>
-          <figure className="absolute top-[42%] left-8 w-[46%] border-[8px] border-white bg-white">
-            <figcaption className="px-2 py-1 text-[11px] uppercase tracking-[0.14em]">02 Listening</figcaption>
-            <Image src="/collage/vinyl.jpg" alt="" width={800} height={600} className="aspect-[4/3] w-full object-cover" />
-          </figure>
-          <figure className="absolute bottom-10 left-[36%] w-[32%] border-[8px] border-white bg-white">
-            <figcaption className="px-2 py-1 text-[11px] uppercase tracking-[0.14em]">03 Community</figcaption>
-            <Image src="/collage/table.jpg" alt="" width={800} height={600} className="aspect-[4/3] w-full object-cover" />
-          </figure>
-          <figure className="absolute right-8 bottom-8 w-[26%] border-[8px] border-white bg-white">
-            <figcaption className="px-2 py-1 text-[11px] uppercase tracking-[0.14em]">04 Books</figcaption>
-            <Image src="/collage/books.jpg" alt="" width={600} height={800} className="aspect-[3/4] w-full object-cover" />
-          </figure>
-          <svg className="pointer-events-none absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden>
-            <path d="M30 48 C 48 42, 58 70, 72 62" fill="none" stroke="#F05A36" strokeWidth="0.6" />
-          </svg>
+        <div className="bg-white px-5 py-8 md:px-12 lg:col-span-7 lg:py-12">
+          <div className="border border-[#DEDEDE] p-4">
+            <div className="mb-4 flex flex-wrap items-center justify-between gap-3 border-b border-[#DEDEDE] pb-3 text-[11px] font-semibold tracking-[0.14em] text-[#626262] uppercase">
+              <span>Design preview</span>
+              <span className="text-[#F05A36]">Not a live recommendation</span>
+            </div>
+            <div className="grid gap-4 md:grid-cols-12">
+              <figure className="border border-[#DEDEDE] bg-white p-2 md:col-span-7">
+                <Image src={preview[0].src} alt="" width={960} height={540} className="aspect-[4/3] w-full object-cover" />
+                <figcaption className="px-1 pt-2">
+                  <p className="text-[18px] font-semibold">{preview[0].caption}</p>
+                  <p className="text-[12px] text-[#626262]">Illustrative photograph · {preview[0].note}</p>
+                </figcaption>
+              </figure>
+              <div className="grid gap-4 md:col-span-5">
+                {preview.slice(1).map((item) => (
+                  <figure key={item.src} className="border border-[#DEDEDE] bg-white p-2">
+                    <Image src={item.src} alt="" width={800} height={600} className="aspect-[16/10] w-full object-cover" />
+                    <figcaption className="px-1 pt-2">
+                      <p className="text-[16px] font-semibold">{item.caption}</p>
+                      <p className="text-[12px] text-[#626262]">Illustrative photograph · {item.note}</p>
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </section>
-      <div className="border-t border-[#DEDEDE]">
-        <section id="method" className="mx-auto grid max-w-[1440px] gap-10 px-5 py-14 md:grid-cols-3 md:px-12">
-          {steps.map((step) => (
-            <article key={step.n}>
-              <p className="text-[12px] tracking-[0.16em] text-[#626262]">{step.n}</p>
-              <h2 className="font-tight mt-3 text-[28px] font-bold tracking-[-0.03em]">{step.title}</h2>
-              <p className="mt-3 max-w-[360px] text-[16px] text-[#626262]">{step.copy}</p>
-            </article>
-          ))}
-        </section>
-      </div>
+
+      <section id="method" className="grid grid-cols-1 border-b border-[#DEDEDE] md:grid-cols-3 md:divide-x md:divide-[#DEDEDE]">
+        {steps.map((step) => (
+          <article key={step.n} className="flex flex-col justify-between px-5 py-10 md:px-10">
+            <div>
+              <p className="text-[11px] font-semibold tracking-[0.16em] text-[#2144ED] uppercase">Step {step.n}</p>
+              <h2 className="mt-3 text-[18px] font-semibold tracking-[-0.02em] uppercase">{step.title}</h2>
+              <p className="mt-3 max-w-[360px] text-[15px] leading-relaxed text-[#626262]">{step.copy}</p>
+            </div>
+            <p className="mt-8 flex items-center justify-between border-t border-[#DEDEDE] pt-3 text-[12px] text-[#626262]">
+              <span className="uppercase tracking-[0.12em]">{step.kicker}</span>
+              <span className="font-semibold text-[#111111]">{step.foot}</span>
+            </p>
+          </article>
+        ))}
+      </section>
+
+      <LiveDiscoveries />
     </main>
   );
 }
